@@ -9,17 +9,17 @@
 import UIKit
 
 protocol playerTableDelegate {
-    func playerTableDelegate(offset: CGPoint)
+    func playerTableDelegate(offset: CGPoint, gesture: UIPanGestureRecognizer)
 }
 
-class PlayerTableViewCell: UITableViewCell {
-
+class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    @IBOutlet weak var statsScrollView: UIScrollView!
-    @IBOutlet weak var statsStackView: UIStackView!
+    @IBOutlet weak var statsCollectionView: UICollectionView!
     @IBOutlet weak var playerNameLabel: UILabel!
     
     var delegate: playerTableDelegate?
+    var player: RosterElement?
+    var statsArray: [String]?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +27,30 @@ class PlayerTableViewCell: UITableViewCell {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(PlayerTableViewCell.scrolled(_:)))
         addGestureRecognizer(panGesture)
         panGesture.delegate = self
-        // Initialization code
+        
+        statsCollectionView.delegate = self
+        statsCollectionView.dataSource = self
+        
+    }
+    
+    func setPlayer(_ player: RosterElement) {
+        self.player = player
+            if let goals = player.stats?.goals,
+                let assists = player.stats?.assists,
+                let points = player.stats?.points,
+                let pim = player.stats?.pim,
+                let blocks = player.stats?.blocked,
+                let faceoff = player.stats?.faceOffPct {
+    
+                    let goalsString = String(goals)
+                    let assistsString = String(assists)
+                    let pointsString = String(points)
+                    let pimString = String(pim)
+                    let blocksString = String(blocks)
+                    let faceoffString = String(faceoff)
+    
+                    statsArray = [goalsString, assistsString, pointsString, pimString, blocksString, faceoffString]
+                }
     }
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -43,13 +66,12 @@ class PlayerTableViewCell: UITableViewCell {
     }
 
     @objc func scrolled(_ sender: UIPanGestureRecognizer) {
-        print(sender.translation(in: self).x)
-        delegate?.playerTableDelegate(offset: CGPoint(x: -sender.translation(in: self).x, y: 0))
+        delegate?.playerTableDelegate(offset: CGPoint(x: -sender.translation(in: self).x, y: 0), gesture: sender)
     }
     
-    func setScrollingOffset(offset: CGPoint) {
-        statsScrollView.setContentOffset(statsScrollView.contentOffset, animated: false)
-        statsScrollView.setContentOffset(offset, animated: false)
+    func setScrollingOffset(offset: CGPoint, gesture: UIPanGestureRecognizer) {
+        statsCollectionView.setContentOffset(offset, animated: false)
+        gesture.setTranslation(.zero, in: self)
     }
 
 
@@ -59,42 +81,25 @@ class PlayerTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func update(with: RosterElement) {
+    func collectionView(_ collectionView: UICollectionView,
+                                 numberOfItemsInSection section: Int) -> Int {
+        guard let statsArray = statsArray else {return 0}
+        return statsArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatsCell", for: indexPath) as! StatsCollectionViewCell
         
-        for view in statsStackView.arrangedSubviews {
-            view.removeFromSuperview()
-        }
+        let stat = statsArray?[indexPath.row]
         
-        if let goals = with.stats?.goals,
-            let assists = with.stats?.assists,
-            let points = with.stats?.points,
-            let pim = with.stats?.pim,
-            let blocks = with.stats?.blocked,
-            let faceoff = with.stats?.faceOffPct {
-            
-                let goalsString = String(goals)
-                let assistsString = String(assists)
-                let pointsString = String(points)
-                let pimString = String(pim)
-                let blocksString = String(blocks)
-                let faceoffString = String(faceoff)
-            
-                let statsArray: [String] = [goalsString, assistsString, pointsString, pimString, blocksString, faceoffString]
-            
-                var index = 0
-                for stat in statsArray {
-                    let textView = UILabel()
-                    textView.text = String(stat)
-                    textView.font = UIFont.systemFont(ofSize: 11)
-                    textView.widthAnchor.constraint(equalToConstant: 50).isActive = true
-                    index += 1
-                    
-                    statsStackView.addArrangedSubview(textView)
-                }
-            
-            }
+        cell.update(with: stat!)
         
-        playerNameLabel.text = with.person.fullName
+        return cell
+    }
+    
+    func update() {
+        
+        playerNameLabel.text = player?.person.fullName
     }
 }
 

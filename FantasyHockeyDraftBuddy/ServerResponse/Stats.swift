@@ -19,7 +19,7 @@ class Stats: Codable {
         let valueContainer = try decoder.container(keyedBy: CodingKeys.self)
         self.statElementList = try valueContainer.decode([StatElement].self, forKey: CodingKeys.statElementList)
     }
-    
+    // Test Commit
     struct StatElement: Codable {
         let statList: [Split]
         
