@@ -10,6 +10,7 @@ import UIKit
 
 protocol playerTableDelegate {
     func playerTablePanGesture(offset: CGPoint)
+    func starTapped(sender: PlayerTableViewCell)
 }
 
 var currentOffset: CGPoint?
@@ -20,6 +21,7 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var playerTeamAndPositionLabel: UILabel!
     @IBOutlet weak var playerImageView: UIImageView!
+    @IBOutlet weak var starButton: UIButton!
     
     var delegate: playerTableDelegate?
     var player: RosterElement?
@@ -40,21 +42,23 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
     func setPlayer(_ player: RosterElement) {
         self.player = player
             if let goals = player.stats?.goals,
-                let assists = player.stats?.assists,
-                let points = player.stats?.points,
-                let pim = player.stats?.pim,
-                let blocks = player.stats?.blocked,
-                let faceoff = player.stats?.faceOffPct {
+            let assists = player.stats?.assists,
+            let points = player.stats?.points,
+            let pim = player.stats?.pim,
+            let blocks = player.stats?.blocked,
+            let faceoff = player.stats?.faceOffPct {
     
-                    let goalsString = String(goals)
-                    let assistsString = String(assists)
-                    let pointsString = String(points)
-                    let pimString = String(pim)
-                    let blocksString = String(blocks)
-                    let faceoffString = String(faceoff)
+                let goalsString = String(goals)
+                let assistsString = String(assists)
+                let pointsString = String(points)
+                let pimString = String(pim)
+                let blocksString = String(blocks)
+                let faceoffString = String(faceoff)
     
-                    statsArray = [goalsString, assistsString, pointsString, pimString, blocksString, faceoffString]
-                }
+                statsArray = [goalsString, assistsString, pointsString, pimString, blocksString, faceoffString]
+            } else {
+                statsArray = ["-", "-", "-", "-", "-", "-"]
+        }
     }
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -131,6 +135,10 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         playerTeamAndPositionLabel.text = ""
         playerNameLabel.text = ""
         statsCollectionView.reloadData()
+    }
+    
+    @IBAction func starButtonTapped(_ sender: Any) {
+        delegate?.starTapped(sender: self)
     }
     
     func update() {

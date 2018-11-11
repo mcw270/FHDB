@@ -12,6 +12,7 @@ class NHLPlayer: Codable {
     var id: Int
     let fullName, link: String
     var team: String = ""
+    var isFavorited: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case id, fullName, link

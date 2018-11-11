@@ -14,6 +14,7 @@ class LoadingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isHidden = true
         let group = DispatchGroup()
         
         APIController.fetchNHLInfo { (teamList) in
@@ -47,6 +48,7 @@ class LoadingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as! ViewController
         destination.players = players
+        navigationController?.navigationBar.isHidden = false
     }
     
 
