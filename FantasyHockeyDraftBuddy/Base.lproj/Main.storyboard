@@ -89,21 +89,21 @@
                                                 <constraint firstAttribute="height" constant="15" id="cfQ-mu-IOO"/>
                                             </constraints>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="100" minimumInteritemSpacing="200" id="hcB-WN-w1T">
-                                                <size key="itemSize" width="50" height="50"/>
+                                                <size key="itemSize" width="50" height="15"/>
                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
                                                 <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="StatsCell" id="pcn-1e-l7B" customClass="StatsCollectionViewCell" customModule="FantasyHockeyDraftBuddy" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="-17.5" width="50" height="50"/>
+                                                    <rect key="frame" x="16" y="0.0" width="50" height="15"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="15"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xb6-nG-jwd">
-                                                                <rect key="frame" x="16" y="20" width="18" height="30"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j0t-Bq-aQ6">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="15"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -111,13 +111,13 @@
                                                         </subviews>
                                                     </view>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="xb6-nG-jwd" secondAttribute="trailing" id="81x-ST-Rz1"/>
-                                                        <constraint firstItem="xb6-nG-jwd" firstAttribute="leading" secondItem="pcn-1e-l7B" secondAttribute="leadingMargin" id="NkN-Xf-s3v"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="xb6-nG-jwd" secondAttribute="bottom" id="W1f-qa-pUe"/>
-                                                        <constraint firstItem="xb6-nG-jwd" firstAttribute="top" secondItem="pcn-1e-l7B" secondAttribute="topMargin" id="cgg-VU-Iap"/>
+                                                        <constraint firstItem="j0t-Bq-aQ6" firstAttribute="leading" secondItem="pcn-1e-l7B" secondAttribute="leading" id="QUw-5T-k1V"/>
+                                                        <constraint firstAttribute="bottom" secondItem="j0t-Bq-aQ6" secondAttribute="bottom" id="VcI-Zf-lcv"/>
+                                                        <constraint firstItem="j0t-Bq-aQ6" firstAttribute="top" secondItem="pcn-1e-l7B" secondAttribute="top" id="fQE-mN-zvz"/>
+                                                        <constraint firstAttribute="trailing" secondItem="j0t-Bq-aQ6" secondAttribute="trailing" id="xFe-sk-TRW"/>
                                                     </constraints>
                                                     <connections>
-                                                        <outlet property="statCellLabel" destination="xb6-nG-jwd" id="c2e-hZ-34E"/>
+                                                        <outlet property="statCellLabel" destination="j0t-Bq-aQ6" id="WfF-zI-pFD"/>
                                                     </connections>
                                                 </collectionViewCell>
                                             </cells>
