@@ -10,11 +10,10 @@ import UIKit
 
 class PlayerTableViewController: UITableViewController, playerTableDelegate {
     
-    func playerTableDelegate(offset: CGPoint, gesture: UIPanGestureRecognizer) {
+    func playerTablePanGesture(offset: CGPoint) {
         for cell in tableView.visibleCells {
             let playerCell = cell as! PlayerTableViewCell
-            
-            playerCell.setScrollingOffset(offset: offset, gesture: gesture)
+            playerCell.setScrollingOffsetAfterGesture(offset: offset)
         }
     }
     
@@ -53,6 +52,7 @@ class PlayerTableViewController: UITableViewController, playerTableDelegate {
         cell.delegate = self
         let player = players[indexPath.row]
         cell.setPlayer(player)
+        cell.setOffset()
         cell.update()
         
         return cell

@@ -9,17 +9,22 @@
 import UIKit
 
 protocol playerTableDelegate {
-    func playerTableDelegate(offset: CGPoint, gesture: UIPanGestureRecognizer)
+    func playerTablePanGesture(offset: CGPoint)
 }
+
+var currentOffset: CGPoint?
 
 class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var statsCollectionView: UICollectionView!
     @IBOutlet weak var playerNameLabel: UILabel!
+    @IBOutlet weak var playerTeamAndPositionLabel: UILabel!
+    @IBOutlet weak var playerImageView: UIImageView!
     
     var delegate: playerTableDelegate?
     var player: RosterElement?
     var statsArray: [String]?
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,8 +34,7 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         panGesture.delegate = self
         
         statsCollectionView.delegate = self
-        statsCollectionView.dataSource = self
-        
+        statsCollectionView.dataSource = self        
     }
     
     func setPlayer(_ player: RosterElement) {
@@ -66,14 +70,37 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
     }
 
     @objc func scrolled(_ sender: UIPanGestureRecognizer) {
-        delegate?.playerTableDelegate(offset: CGPoint(x: -sender.translation(in: self).x, y: 0), gesture: sender)
+        delegate?.playerTablePanGesture(offset: CGPoint(x: -sender.translation(in: self).x, y: 0))
+        sender.setTranslation(.zero, in: self)
     }
     
-    func setScrollingOffset(offset: CGPoint, gesture: UIPanGestureRecognizer) {
-        statsCollectionView.setContentOffset(offset, animated: false)
-        gesture.setTranslation(.zero, in: self)
+    func setScrollingOffsetAfterGesture(offset: CGPoint) {
+        
+        let newOffset = statsCollectionView.contentOffset.x + offset.x
+        
+        var minContentOffset: CGPoint {
+            return CGPoint(
+                x: -statsCollectionView.contentInset.left,
+                y: 0)
+        }
+        
+        var maxContentOffset: CGPoint {
+            return CGPoint(
+                x: statsCollectionView.contentSize.width - statsCollectionView.bounds.width + statsCollectionView.contentInset.right,
+                y: 0)
+        }
+        
+        if newOffset <= maxContentOffset.x && newOffset >= minContentOffset.x {
+            statsCollectionView.setContentOffset(CGPoint(x: newOffset, y: 0), animated: false)
+            currentOffset = statsCollectionView.contentOffset
+        }
+        
     }
-
+    
+    func setOffset() {
+        guard let currentOffset = currentOffset else { return }
+        statsCollectionView.setContentOffset(currentOffset, animated: false)
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -94,12 +121,32 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         
         cell.update(with: stat!)
         
+        
         return cell
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        playerImageView.image = nil
+        playerTeamAndPositionLabel.text = ""
+        playerNameLabel.text = ""
+        statsCollectionView.reloadData()
     }
     
     func update() {
         
-        playerNameLabel.text = player?.person.fullName
+        if let player = player {
+        
+        playerNameLabel.text = player.person.fullName
+            
+        playerTeamAndPositionLabel.text = "\(player.person.team) - \(player.position.abbreviation.rawValue)"
+        
+            APIController.fetchPlayerImage(playerId: player.person.id, completion: { (playerImage) in
+                DispatchQueue.main.async {
+                    self.playerImageView.image = playerImage
+                }
+            })
+        }
     }
 }
 

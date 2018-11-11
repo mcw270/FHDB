@@ -20,6 +20,7 @@ class LoadingViewController: UIViewController {
             for team in teamList {
                 for player in team.roster.rosterList {
                     group.enter()
+                    player.person.team = team.abbreviation
                     self.players.append(player)
                     APIController.fetchStatistics(playerID: player.person.id, completion: { (stats) in
                         guard let stats = stats else {

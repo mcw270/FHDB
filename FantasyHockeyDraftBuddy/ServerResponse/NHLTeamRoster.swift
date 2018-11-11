@@ -40,9 +40,6 @@ class RosterElement: Codable {
     }
     
     func setStats(stats: SplitStat) {
-//        APIController.fetchStatistics(playerID: id, completion: { (statistics) in
-//            self.stats = statistics
-//        })
         self.stats = stats
     }
 }

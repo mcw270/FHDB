@@ -15,4 +15,8 @@ class StatsCollectionViewCell: UICollectionViewCell {
     func update(with stat: String) {
         statCellLabel.text = stat
     }
+    
+    override func prepareForReuse() {
+        statCellLabel.text = ""
+    }
 }

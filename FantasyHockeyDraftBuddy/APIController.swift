@@ -6,7 +6,7 @@
 //  Copyright © 2018 Matthew Wheeler. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class APIController {
     
@@ -55,8 +55,17 @@ class APIController {
             }
         }
         task.resume()
-
-
     }
-
+    
+    static func fetchPlayerImage(playerId: Int, completion: (@escaping (UIImage?) -> Void)) {
+        let baseURL = URL(string: "https://nhl.bamcontent.com/images/headshots/current/168x168/\(playerId).jpg")!
+        
+        let task = URLSession.shared.dataTask(with: baseURL) { (data, response, error) in
+            if let data = data {
+                let playerImage = UIImage(data: data)
+                completion(playerImage)
+            }
+        }
+        task.resume()
+    }
 }
