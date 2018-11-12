@@ -26,6 +26,7 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
     var delegate: playerTableDelegate?
     var player: RosterElement?
     var statsArray: [String]?
+    let statCategories: [String] = ["G", "A", "P", "PIM", "BKs", "FO%"]
     
     
     override func awakeFromNib() {
@@ -36,7 +37,8 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         panGesture.delegate = self
         
         statsCollectionView.delegate = self
-        statsCollectionView.dataSource = self        
+        statsCollectionView.dataSource = self
+        
     }
     
     func setPlayer(_ player: RosterElement) {
@@ -101,9 +103,14 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
         
     }
     
-    func setOffset() {
-        guard let currentOffset = currentOffset else { return }
-        statsCollectionView.setContentOffset(currentOffset, animated: false)
+    func setOffset(offset: CGPoint?) {
+        if let offset = offset {
+            statsCollectionView.setContentOffset(offset, animated: false)
+            currentOffset = offset
+        } else {
+            guard let currentOffset = currentOffset else { return }
+            statsCollectionView.setContentOffset(currentOffset, animated: false)
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -121,9 +128,11 @@ class PlayerTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "StatsCell", for: indexPath) as! StatsCollectionViewCell
         
+        cell.heightAnchor.constraint(equalToConstant: 30)
+        
         let stat = statsArray?[indexPath.row]
         
-        cell.update(with: stat!)
+        cell.update(with: stat!, category: statCategories[indexPath.row])
         
         
         return cell

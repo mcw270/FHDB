@@ -11,17 +11,29 @@ import UIKit
 class PlayerTableViewController: UITableViewController, playerTableDelegate, UISearchBarDelegate, UISearchResultsUpdating, UISearchControllerDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
-        
+        filterContentForSearchText(searchController.searchBar.text!)
     }
     
+    func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
     
     let searchController = UISearchController(searchResultsController:  nil)
     
+    
     func starTapped(sender: PlayerTableViewCell) {
+        let player: RosterElement
         if let indexPath = tableView.indexPath(for: sender) {
-            let player = players[indexPath.row]
-            player.person.isFavorited = !player.person.isFavorited
-            players[indexPath.row] = player
+            if isFiltering() {
+                player = filteredPlayers[indexPath.row]
+                player.person.isFavorited = !player.person.isFavorited
+                filteredPlayers[indexPath.row] = player
+            } else {
+                player = players[indexPath.row]
+                player.person.isFavorited = !player.person.isFavorited
+                players[indexPath.row] = player
+            }
+            
             tableView.reloadRows(at: [indexPath], with: .none)
         }
     }
@@ -35,29 +47,44 @@ class PlayerTableViewController: UITableViewController, playerTableDelegate, UIS
     
     
     var players: [RosterElement] = []
+    var filteredPlayers: [RosterElement] = []
+    
+    func searchBarIsEmpty() -> Bool {
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
+        filteredPlayers = players.filter({( player : RosterElement) -> Bool in
+            return player.person.fullName.lowercased().contains(searchText.lowercased())
+        })
+        
+        tableView.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.topItem?.title = " "
+//        navigationController?.navigationBar.topItem?.title = " "
         
         searchController.searchResultsUpdater = self
-        searchController.delegate = self
-        searchController.searchBar.delegate = self
+//        searchController.delegate = self
+//        searchController.searchBar.delegate = self
         
-        searchController.hidesNavigationBarDuringPresentation = true
-        searchController.dimsBackgroundDuringPresentation = true
+        searchController.searchBar.placeholder = "Search Players"
+        definesPresentationContext = true
+        
+        searchController.obscuresBackgroundDuringPresentation = false
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
         
         tableView.dataSource = self
         tableView.delegate = self
         
         
-        navigationItem.titleView = searchController.searchBar
+//        navigationItem.titleView = searchController.searchBar
         
         
-        definesPresentationContext = true
-        
-        setUpSearchBar()
+//        setUpSearchBar()
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -86,8 +113,15 @@ class PlayerTableViewController: UITableViewController, playerTableDelegate, UIS
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            if isFiltering() {
+                return 0
+            } else {
+                return 1
+            }
         } else if section == 1 {
+            if isFiltering() {
+                return filteredPlayers.count
+            }
             return players.count
         } else {
             return 0
@@ -98,10 +132,22 @@ class PlayerTableViewController: UITableViewController, playerTableDelegate, UIS
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as! PlayerTableViewCell
 
         cell.delegate = self
-        let player = players[indexPath.row]
+        let player: RosterElement
+        
+        if indexPath.section == 0 {
+            player = players[indexPath.row]
+        } else {
+            if isFiltering() {
+                player = filteredPlayers[indexPath.row]
+                cell.setOffset(offset: CGPoint.zero)
+            } else {
+                player = players[indexPath.row]
+                cell.setOffset(offset: nil)
+            }
+        }
+        
         cell.setPlayer(player)
         cell.starButton.isSelected = player.person.isFavorited
-        cell.setOffset()
         cell.update()
         
         return cell
@@ -109,7 +155,11 @@ class PlayerTableViewController: UITableViewController, playerTableDelegate, UIS
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
-            return "Recommended Pick"
+            if isFiltering() {
+                return nil
+            } else {
+                return "Recommended Pick"
+            }
         } else {
             return "All Players"
         }

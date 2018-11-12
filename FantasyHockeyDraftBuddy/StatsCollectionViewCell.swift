@@ -11,12 +11,15 @@ import UIKit
 class StatsCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var statCellLabel: UILabel!
+    @IBOutlet weak var statCategoryLabel: UILabel!
     
-    func update(with stat: String) {
+    func update(with stat: String, category: String) {
         statCellLabel.text = stat
+        statCategoryLabel.text = category
     }
     
     override func prepareForReuse() {
         statCellLabel.text = ""
+        statCategoryLabel.text = ""
     }
 }
