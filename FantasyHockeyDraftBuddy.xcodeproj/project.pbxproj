@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F43B939C21877833005E67C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B939B21877833005E67C5 /* AppDelegate.swift */; };
-		F43B939E21877833005E67C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B939D21877833005E67C5 /* ViewController.swift */; };
+		F43B939E21877833005E67C5 /* LeagueTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B939D21877833005E67C5 /* LeagueTableViewController.swift */; };
 		F43B93A121877833005E67C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F43B939F21877833005E67C5 /* Main.storyboard */; };
 		F43B93A321877837005E67C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43B93A221877837005E67C5 /* Assets.xcassets */; };
 		F43B93A621877837005E67C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F43B93A421877837005E67C5 /* LaunchScreen.storyboard */; };
@@ -28,7 +28,7 @@
 /* Begin PBXFileReference section */
 		F43B939821877833005E67C5 /* FantasyHockeyDraftBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FantasyHockeyDraftBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F43B939B21877833005E67C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F43B939D21877833005E67C5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F43B939D21877833005E67C5 /* LeagueTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueTableViewController.swift; sourceTree = "<group>"; };
 		F43B93A021877833005E67C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F43B93A221877837005E67C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F43B93A521877837005E67C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,16 +76,12 @@
 		F43B939A21877833005E67C5 /* FantasyHockeyDraftBuddy */ = {
 			isa = PBXGroup;
 			children = (
-				F48C0A21218E1B690036D01B /* ServerResponse */,
 				F43B939B21877833005E67C5 /* AppDelegate.swift */,
-				F43B939D21877833005E67C5 /* ViewController.swift */,
 				F43B939F21877833005E67C5 /* Main.storyboard */,
-				F48C0A26218F67D30036D01B /* LoadingViewController.swift */,
-				F48C0A22218E5FE70036D01B /* PlayerTableViewController.swift */,
-				F4FDB360219A367900EA52CF /* PlayerTable+Searching.swift */,
-				F48C0A24218E63810036D01B /* PlayerTableViewCell.swift */,
-				F472D9F121933EB0006250FE /* StatsCollectionViewCell.swift */,
-				F43B93AD21877880005E67C5 /* APIController.swift */,
+				F4FDB362219E154600EA52CF /* View Controllers */,
+				F4FDB364219E158300EA52CF /* Cells */,
+				F48C0A21218E1B690036D01B /* ServerResponse */,
+				F4FDB365219E15AE00EA52CF /* Other Controllers */,
 				F43B93A221877837005E67C5 /* Assets.xcassets */,
 				F43B93A421877837005E67C5 /* LaunchScreen.storyboard */,
 				F43B93A721877837005E67C5 /* Info.plist */,
@@ -103,6 +99,42 @@
 				F48C0A0F218A7DB30036D01B /* NHLPlayer.swift */,
 			);
 			path = ServerResponse;
+			sourceTree = "<group>";
+		};
+		F4FDB362219E154600EA52CF /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F4FDB363219E156A00EA52CF /* Extensions */,
+				F43B939D21877833005E67C5 /* LeagueTableViewController.swift */,
+				F48C0A26218F67D30036D01B /* LoadingViewController.swift */,
+				F48C0A22218E5FE70036D01B /* PlayerTableViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		F4FDB363219E156A00EA52CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F4FDB360219A367900EA52CF /* PlayerTable+Searching.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F4FDB364219E158300EA52CF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F48C0A24218E63810036D01B /* PlayerTableViewCell.swift */,
+				F472D9F121933EB0006250FE /* StatsCollectionViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		F4FDB365219E15AE00EA52CF /* Other Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F43B93AD21877880005E67C5 /* APIController.swift */,
+			);
+			path = "Other Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,7 +211,7 @@
 				F48C0A20218D26720036D01B /* URL+Helpers.swift in Sources */,
 				F48C0A10218A7DB30036D01B /* NHLPlayer.swift in Sources */,
 				F48C0A25218E63810036D01B /* PlayerTableViewCell.swift in Sources */,
-				F43B939E21877833005E67C5 /* ViewController.swift in Sources */,
+				F43B939E21877833005E67C5 /* LeagueTableViewController.swift in Sources */,
 				F48C0A06218A1DBA0036D01B /* NHLTeam.swift in Sources */,
 				F48C0A1A218CC9740036D01B /* Stats.swift in Sources */,
 				F472D9F221933EB0006250FE /* StatsCollectionViewCell.swift in Sources */,

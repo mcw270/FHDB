@@ -8,10 +8,11 @@
 
 import UIKit
 
-extension PlayerTableViewController: UISearchResultsUpdating {
+extension PlayerTableViewController: UISearchResultsUpdating, UISearchBarDelegate {
     
     func setUpSearchBar() {
         searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
         
         searchController.searchBar.placeholder = "Search Players"
         definesPresentationContext = true
@@ -23,6 +24,12 @@ extension PlayerTableViewController: UISearchResultsUpdating {
     
     func searchBarIsEmpty() -> Bool {
         return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        if(menuVisible) {
+            toggleSideMenu()
+        }
     }
     
     func filterContentForSearchText(_ searchText: String, scope: String = "All") {

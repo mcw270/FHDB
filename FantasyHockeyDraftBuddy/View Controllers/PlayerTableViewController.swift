@@ -8,11 +8,18 @@
 
 import UIKit
 
-class PlayerTableViewController: UITableViewController, playerTableDelegate {
+class PlayerTableViewController: UIViewController, playerTableDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    
+    @IBOutlet weak var sideMenuTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var sideMenuView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     let searchController = UISearchController(searchResultsController:  nil)
     var players: [RosterElement] = []
     var filteredPlayers: [RosterElement] = []
+    var menuVisible = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +28,15 @@ class PlayerTableViewController: UITableViewController, playerTableDelegate {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        sideMenuTrailingConstraint.constant = 0 + self.sideMenuView.frame.size.width
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             if isFiltering() {
                 return 0
@@ -44,7 +53,7 @@ class PlayerTableViewController: UITableViewController, playerTableDelegate {
         }
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath) as! PlayerTableViewCell
 
         cell.delegate = self
@@ -70,7 +79,7 @@ class PlayerTableViewController: UITableViewController, playerTableDelegate {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             if isFiltering() {
                 return nil
@@ -107,4 +116,31 @@ class PlayerTableViewController: UITableViewController, playerTableDelegate {
         }
     }
 
+    @IBAction func exitButtonTapped(_ sender: Any) {
+        
+        performSegue(withIdentifier: "unwindToLeagues", sender: self)
+    }
+    
+    @objc func toggleSideMenu() {
+        if menuVisible {
+            UIView.animate(withDuration: 0.5) {
+                self.sideMenuTrailingConstraint.constant = 0 + self.sideMenuView.frame.size.width
+                self.tableViewLeadingConstraint.constant = 0
+                self.view.layoutIfNeeded()
+                }
+        } else {
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.5) {
+                self.sideMenuTrailingConstraint.constant = 0
+                self.tableViewLeadingConstraint.constant = -self.sideMenuView.frame.size.width
+                self.view.layoutIfNeeded()
+            }
+        }
+        menuVisible = !menuVisible
+    }
+    
+    @IBAction func favoritesButtonTapped(_ sender: Any) {
+        toggleSideMenu()
+    }
+    
 }

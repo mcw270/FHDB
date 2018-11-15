@@ -46,9 +46,8 @@ class LoadingViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destination = segue.destination as! ViewController
-        destination.players = players
-        navigationController?.navigationBar.isHidden = false
+        let destination = segue.destination as! LeagueTableViewController
+        destination.players = players        
     }
     
 
