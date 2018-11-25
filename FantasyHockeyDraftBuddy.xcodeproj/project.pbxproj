@@ -13,6 +13,11 @@
 		F43B93A321877837005E67C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F43B93A221877837005E67C5 /* Assets.xcassets */; };
 		F43B93A621877837005E67C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F43B93A421877837005E67C5 /* LaunchScreen.storyboard */; };
 		F43B93AE21877880005E67C5 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43B93AD21877880005E67C5 /* APIController.swift */; };
+		F43E696921A9DC56001BAB43 /* LeagueNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43E696821A9DC56001BAB43 /* LeagueNameViewController.swift */; };
+		F43E696B21A9DC93001BAB43 /* AddLeagueScoringTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43E696A21A9DC93001BAB43 /* AddLeagueScoringTableViewController.swift */; };
+		F43E696D21A9DCA7001BAB43 /* AddLeagueRosterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43E696C21A9DCA7001BAB43 /* AddLeagueRosterTableViewController.swift */; };
+		F43E696F21AA08AC001BAB43 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43E696E21AA08AC001BAB43 /* Constants.swift */; };
+		F43E697121AA0F9C001BAB43 /* AddLeagueScoringTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43E697021AA0F9C001BAB43 /* AddLeagueScoringTableViewCell.swift */; };
 		F472D9F221933EB0006250FE /* StatsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F472D9F121933EB0006250FE /* StatsCollectionViewCell.swift */; };
 		F48C0A06218A1DBA0036D01B /* NHLTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C0A05218A1DBA0036D01B /* NHLTeam.swift */; };
 		F48C0A0E218A7D550036D01B /* NHLTeamRoster.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C0A0D218A7D550036D01B /* NHLTeamRoster.swift */; };
@@ -23,6 +28,9 @@
 		F48C0A25218E63810036D01B /* PlayerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C0A24218E63810036D01B /* PlayerTableViewCell.swift */; };
 		F48C0A27218F67D30036D01B /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48C0A26218F67D30036D01B /* LoadingViewController.swift */; };
 		F4FDB361219A367900EA52CF /* PlayerTable+Searching.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FDB360219A367900EA52CF /* PlayerTable+Searching.swift */; };
+		F4FDB36721A0A6F100EA52CF /* UserLeague.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FDB36621A0A6F100EA52CF /* UserLeague.swift */; };
+		F4FDB36921A0A82200EA52CF /* UserTeam.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FDB36821A0A82200EA52CF /* UserTeam.swift */; };
+		F4FDB36B21A0B5C700EA52CF /* LeagueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FDB36A21A0B5C700EA52CF /* LeagueTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +42,11 @@
 		F43B93A521877837005E67C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F43B93A721877837005E67C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F43B93AD21877880005E67C5 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
+		F43E696821A9DC56001BAB43 /* LeagueNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueNameViewController.swift; sourceTree = "<group>"; };
+		F43E696A21A9DC93001BAB43 /* AddLeagueScoringTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLeagueScoringTableViewController.swift; sourceTree = "<group>"; };
+		F43E696C21A9DCA7001BAB43 /* AddLeagueRosterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLeagueRosterTableViewController.swift; sourceTree = "<group>"; };
+		F43E696E21AA08AC001BAB43 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F43E697021AA0F9C001BAB43 /* AddLeagueScoringTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLeagueScoringTableViewCell.swift; sourceTree = "<group>"; };
 		F472D9F121933EB0006250FE /* StatsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsCollectionViewCell.swift; sourceTree = "<group>"; };
 		F48C0A05218A1DBA0036D01B /* NHLTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHLTeam.swift; sourceTree = "<group>"; };
 		F48C0A0D218A7D550036D01B /* NHLTeamRoster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NHLTeamRoster.swift; sourceTree = "<group>"; };
@@ -44,6 +57,9 @@
 		F48C0A24218E63810036D01B /* PlayerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerTableViewCell.swift; sourceTree = "<group>"; };
 		F48C0A26218F67D30036D01B /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		F4FDB360219A367900EA52CF /* PlayerTable+Searching.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlayerTable+Searching.swift"; sourceTree = "<group>"; };
+		F4FDB36621A0A6F100EA52CF /* UserLeague.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLeague.swift; sourceTree = "<group>"; };
+		F4FDB36821A0A82200EA52CF /* UserTeam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTeam.swift; sourceTree = "<group>"; };
+		F4FDB36A21A0B5C700EA52CF /* LeagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,17 +92,32 @@
 		F43B939A21877833005E67C5 /* FantasyHockeyDraftBuddy */ = {
 			isa = PBXGroup;
 			children = (
+				F43E696721A9DC2E001BAB43 /* Add League Controllers */,
 				F43B939B21877833005E67C5 /* AppDelegate.swift */,
 				F43B939F21877833005E67C5 /* Main.storyboard */,
 				F4FDB362219E154600EA52CF /* View Controllers */,
 				F4FDB364219E158300EA52CF /* Cells */,
 				F48C0A21218E1B690036D01B /* ServerResponse */,
 				F4FDB365219E15AE00EA52CF /* Other Controllers */,
+				F4FDB36621A0A6F100EA52CF /* UserLeague.swift */,
+				F4FDB36821A0A82200EA52CF /* UserTeam.swift */,
 				F43B93A221877837005E67C5 /* Assets.xcassets */,
 				F43B93A421877837005E67C5 /* LaunchScreen.storyboard */,
 				F43B93A721877837005E67C5 /* Info.plist */,
+				F43E696E21AA08AC001BAB43 /* Constants.swift */,
 			);
 			path = FantasyHockeyDraftBuddy;
+			sourceTree = "<group>";
+		};
+		F43E696721A9DC2E001BAB43 /* Add League Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F43E696821A9DC56001BAB43 /* LeagueNameViewController.swift */,
+				F43E696A21A9DC93001BAB43 /* AddLeagueScoringTableViewController.swift */,
+				F43E696C21A9DCA7001BAB43 /* AddLeagueRosterTableViewController.swift */,
+				F43E697021AA0F9C001BAB43 /* AddLeagueScoringTableViewCell.swift */,
+			);
+			path = "Add League Controllers";
 			sourceTree = "<group>";
 		};
 		F48C0A21218E1B690036D01B /* ServerResponse */ = {
@@ -105,8 +136,8 @@
 			isa = PBXGroup;
 			children = (
 				F4FDB363219E156A00EA52CF /* Extensions */,
-				F43B939D21877833005E67C5 /* LeagueTableViewController.swift */,
 				F48C0A26218F67D30036D01B /* LoadingViewController.swift */,
+				F43B939D21877833005E67C5 /* LeagueTableViewController.swift */,
 				F48C0A22218E5FE70036D01B /* PlayerTableViewController.swift */,
 			);
 			path = "View Controllers";
@@ -125,6 +156,7 @@
 			children = (
 				F48C0A24218E63810036D01B /* PlayerTableViewCell.swift */,
 				F472D9F121933EB0006250FE /* StatsCollectionViewCell.swift */,
+				F4FDB36A21A0B5C700EA52CF /* LeagueTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -210,15 +242,23 @@
 			files = (
 				F48C0A20218D26720036D01B /* URL+Helpers.swift in Sources */,
 				F48C0A10218A7DB30036D01B /* NHLPlayer.swift in Sources */,
+				F43E696921A9DC56001BAB43 /* LeagueNameViewController.swift in Sources */,
 				F48C0A25218E63810036D01B /* PlayerTableViewCell.swift in Sources */,
 				F43B939E21877833005E67C5 /* LeagueTableViewController.swift in Sources */,
+				F43E696D21A9DCA7001BAB43 /* AddLeagueRosterTableViewController.swift in Sources */,
 				F48C0A06218A1DBA0036D01B /* NHLTeam.swift in Sources */,
+				F43E697121AA0F9C001BAB43 /* AddLeagueScoringTableViewCell.swift in Sources */,
+				F43E696B21A9DC93001BAB43 /* AddLeagueScoringTableViewController.swift in Sources */,
 				F48C0A1A218CC9740036D01B /* Stats.swift in Sources */,
 				F472D9F221933EB0006250FE /* StatsCollectionViewCell.swift in Sources */,
+				F4FDB36921A0A82200EA52CF /* UserTeam.swift in Sources */,
 				F48C0A0E218A7D550036D01B /* NHLTeamRoster.swift in Sources */,
 				F43B939C21877833005E67C5 /* AppDelegate.swift in Sources */,
+				F4FDB36B21A0B5C700EA52CF /* LeagueTableViewCell.swift in Sources */,
 				F48C0A27218F67D30036D01B /* LoadingViewController.swift in Sources */,
+				F43E696F21AA08AC001BAB43 /* Constants.swift in Sources */,
 				F43B93AE21877880005E67C5 /* APIController.swift in Sources */,
+				F4FDB36721A0A6F100EA52CF /* UserLeague.swift in Sources */,
 				F48C0A23218E5FE70036D01B /* PlayerTableViewController.swift in Sources */,
 				F4FDB361219A367900EA52CF /* PlayerTable+Searching.swift in Sources */,
 			);

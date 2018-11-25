@@ -8,13 +8,79 @@
 
 import UIKit
 
-class LeagueTableViewController: UIViewController {
+class LeagueTableViewController: UITableViewController {
     
     var players: [RosterElement] = []
-
+    var leagues: [UserLeague] = UserLeague.loadSampleData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.hidesBackButton = true
+        
+        let group = DispatchGroup()
+        APIController.fetchNHLInfo { (teamList) in
+            for team in teamList {
+                for player in team.roster.rosterList {
+                    group.enter()
+                    player.person.team = team.abbreviation
+                    self.players.append(player)
+                    APIController.fetchStatistics(playerID: player.person.id, completion: { (stats) in
+                        guard let stats = stats else {
+                            group.leave()
+                            return
+                        }
+                        
+                        player.setStats(stats: stats)
+                        group.leave()
+                    })
+                }
+            }
+            
+            group.notify(queue: .main) {
+                let alert = UIAlertController(title: "Loaded", message: "Loaded Data", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                    switch action.style{
+                    case .default:
+                        print("default")
+                        
+                    case .cancel:
+                        print("cancel")
+                        
+                    case .destructive:
+                        print("destructive")
+                        
+                        
+                    }}))
+                self.present(alert, animated: true, completion: nil)
+            }
+            
+        }
+        
+
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return leagues.count
+        } else {
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LeagueCell") as! LeagueTableViewCell
+        
+        let league = leagues[indexPath.row]
+        cell.update(league: league)
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "leagueSegue", sender: nil)
 
     }
     
@@ -22,20 +88,12 @@ class LeagueTableViewController: UIViewController {
 //        let destination = segue.destination as! PlayerTableViewController
 //        destination.players = players
         
-        
-        let barViewControllers = segue.destination as! UITabBarController
-        let nav = barViewControllers.viewControllers![0] as! UINavigationController
-        let destinationViewController = nav.viewControllers[0] as! PlayerTableViewController
-        destinationViewController.players = players
+        if segue.identifier == "leagueSegue" {
+            let barViewControllers = segue.destination as! UITabBarController
+            let nav = barViewControllers.viewControllers![0] as! UINavigationController
+            let destinationViewController = nav.viewControllers[0] as! PlayerTableViewController
+            destinationViewController.players = players
+        }
     }
-    
-    @IBAction func tableButtonTapped(_ sender: Any) {
-        performSegue(withIdentifier: "showTableSegue", sender: nil)
-        
-        
-    }
-    
-    @IBAction func unwindToVC1(segue:UIStoryboardSegue) { }
-
 }
 

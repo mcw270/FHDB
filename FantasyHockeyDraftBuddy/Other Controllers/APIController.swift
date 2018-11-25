@@ -27,6 +27,11 @@ class APIController {
                 let teams = try? jsonDecoder.decode(Teams.self, from: data) {
                     allTeamList = teams.teamList
                     completion(allTeamList)
+            } else {
+                print("No Data")
+            }
+            if let error = error {
+                print(error)
             }
         }
         task.resume()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fpW-Zx-K3e">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="lPm-fA-h8K">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,45 +20,10 @@
                         <viewLayoutGuide key="safeArea" id="g3p-sM-mZB"/>
                     </view>
                     <navigationItem key="navigationItem" id="2mi-UD-hIR"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="loadingSegue" id="Nm0-6m-ttr"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f1a-vE-QNj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1788" y="106"/>
-        </scene>
-        <!--Leagues-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="FantasyHockeyDraftBuddy" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAC-L6-fd6">
-                                <rect key="frame" x="148" y="391" width="79" height="30"/>
-                                <state key="normal" title="Show Table"/>
-                                <connections>
-                                    <action selector="tableButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BwV-6f-8aI"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="TAC-L6-fd6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5us-8S-bMf"/>
-                            <constraint firstItem="TAC-L6-fd6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cUN-KA-EW4"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Leagues" id="46v-xc-dtf"/>
-                    <connections>
-                        <segue destination="GYh-af-KTZ" kind="show" identifier="showTableSegue" id="mYr-gh-Obi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3788" y="106"/>
         </scene>
         <!--Player List-->
         <scene sceneID="QbS-eA-z1U">
@@ -241,7 +206,261 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ue8-j6-5PX" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="f62-EW-fLq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="7892" y="-947.29064039408865"/>
+            <point key="canvasLocation" x="9022" y="106"/>
+        </scene>
+        <!--League Setup-->
+        <scene sceneID="74E-GU-vME">
+            <objects>
+                <viewController id="Wgo-vl-nPO" customClass="LeagueNameViewController" customModule="FantasyHockeyDraftBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eaH-5T-HP2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="d5T-9I-XnO">
+                                <rect key="frame" x="0.0" y="372.33333333333331" width="375" height="67.666666666666686"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your league called?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHu-AN-b20">
+                                        <rect key="frame" x="52" y="0.0" width="271" height="27.666666666666668"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="League Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8oP-lL-tJa">
+                                        <rect key="frame" x="47" y="37.666666666666686" width="281" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <action selector="leagueNameTextChanged:" destination="Wgo-vl-nPO" eventType="editingChanged" id="XHq-Oy-XRJ"/>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="8oP-lL-tJa" firstAttribute="width" secondItem="d5T-9I-XnO" secondAttribute="width" multiplier="0.75" id="Ucv-zw-E91"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="d5T-9I-XnO" firstAttribute="leading" secondItem="TLJ-u0-paV" secondAttribute="leading" id="PAA-vg-PK6"/>
+                            <constraint firstItem="d5T-9I-XnO" firstAttribute="centerY" secondItem="eaH-5T-HP2" secondAttribute="centerY" id="QGu-bp-Tg6"/>
+                            <constraint firstItem="d5T-9I-XnO" firstAttribute="centerX" secondItem="eaH-5T-HP2" secondAttribute="centerX" id="kzU-SA-tfP"/>
+                            <constraint firstItem="TLJ-u0-paV" firstAttribute="trailing" secondItem="d5T-9I-XnO" secondAttribute="trailing" id="rMo-3Q-fTQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="TLJ-u0-paV"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="League Setup" id="OfZ-PS-n4J">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="tiz-iC-qg5">
+                            <connections>
+                                <action selector="nextButtonTapped:" destination="Wgo-vl-nPO" id="XFy-E3-ygF"/>
+                                <segue destination="oWW-df-cex" kind="show" identifier="leagueNameToScoringSegue" id="al7-2L-JAj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="leagueNameTextField" destination="8oP-lL-tJa" id="jRT-cW-ZIP"/>
+                        <outlet property="nextButton" destination="tiz-iC-qg5" id="0To-Pp-wh4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hPt-M9-tTt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5676" y="-654.67980295566508"/>
+        </scene>
+        <!--Scoring-->
+        <scene sceneID="H8x-Sh-p3z">
+            <objects>
+                <tableViewController title="Scoring" id="oWW-df-cex" customClass="AddLeagueScoringTableViewController" customModule="FantasyHockeyDraftBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Tol-ev-Wsc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addLeagueScoringCell" id="IHh-qz-UZm" customClass="AddLeagueScoringTableViewCell" customModule="FantasyHockeyDraftBuddy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IHh-qz-UZm" id="ihr-ff-glP">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Y5-ft-8vy">
+                                            <rect key="frame" x="26" y="10" width="48" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="d7m-rM-eoY">
+                                            <rect key="frame" x="247.66666666666666" y="4.6666666666666679" width="117.33333333333334" height="34.333333333333329"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RvD-H8-haE">
+                                                    <rect key="frame" x="0.0" y="4.6666666666666661" width="13.333333333333334" height="25.333333333333336"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="ogh-tT-gn7">
+                                                    <rect key="frame" x="23.333333333333343" y="2.6666666666666643" width="94" height="29"/>
+                                                    <connections>
+                                                        <action selector="stepperTapped:" destination="IHh-qz-UZm" eventType="valueChanged" id="TZh-m7-DpI"/>
+                                                    </connections>
+                                                </stepper>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="d7m-rM-eoY" secondAttribute="trailing" constant="10" id="IT3-L7-YAp"/>
+                                        <constraint firstItem="1Y5-ft-8vy" firstAttribute="leading" secondItem="ihr-ff-glP" secondAttribute="leadingMargin" constant="10" id="JIg-kv-Cen"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="d7m-rM-eoY" secondAttribute="bottom" constant="-6" id="TJN-Dg-wqU"/>
+                                        <constraint firstItem="1Y5-ft-8vy" firstAttribute="centerY" secondItem="ihr-ff-glP" secondAttribute="centerY" id="UWT-dL-gec"/>
+                                        <constraint firstItem="d7m-rM-eoY" firstAttribute="centerY" secondItem="ihr-ff-glP" secondAttribute="centerY" id="V9a-Pl-LDh"/>
+                                        <constraint firstItem="d7m-rM-eoY" firstAttribute="centerY" secondItem="ihr-ff-glP" secondAttribute="centerY" id="d9h-Qa-P9F"/>
+                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1Y5-ft-8vy" secondAttribute="trailing" constant="20" symbolic="YES" id="ujX-y4-uN9"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="statCountLabel" destination="RvD-H8-haE" id="SWH-aL-ZSk"/>
+                                    <outlet property="statLabel" destination="1Y5-ft-8vy" id="B6S-1G-CG4"/>
+                                    <outlet property="statStepper" destination="ogh-tT-gn7" id="2FO-St-4Dh"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="oWW-df-cex" id="zYB-fy-i8p"/>
+                            <outlet property="delegate" destination="oWW-df-cex" id="7JN-yR-TSD"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Scoring" id="voF-WC-DRF">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="uOd-K3-mYt">
+                            <connections>
+                                <segue destination="0az-ld-R1N" kind="show" identifier="scoringToRosterSegue" id="V7I-YG-iZS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="nextButton" destination="uOd-K3-mYt" id="2Xc-yE-Wxu"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pGo-zd-NoW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6467" y="-657"/>
+        </scene>
+        <!--Roster-->
+        <scene sceneID="kSp-NH-ajo">
+            <objects>
+                <tableViewController id="0az-ld-R1N" customClass="AddLeagueRosterTableViewController" customModule="FantasyHockeyDraftBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="afh-pL-BA1">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addLeagueRosterCell" id="KVw-cD-qwe">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KVw-cD-qwe" id="PIg-JG-6hU">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ix-ny-6xd">
+                                            <rect key="frame" x="26" y="5.6666666666666679" width="64" height="32.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZcH-oP-NbI">
+                                            <rect key="frame" x="244" y="4.6666666666666679" width="121" height="34.333333333333329"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ls5-DT-zlE">
+                                                    <rect key="frame" x="0.0" y="0.0" width="17" height="34.333333333333336"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="U48-6S-3fi">
+                                                    <rect key="frame" x="27" y="0.0" width="94" height="29"/>
+                                                </stepper>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ZcH-oP-NbI" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4ix-ny-6xd" secondAttribute="trailing" constant="8" symbolic="YES" id="Bjm-a9-Yoz"/>
+                                        <constraint firstItem="4ix-ny-6xd" firstAttribute="leading" secondItem="PIg-JG-6hU" secondAttribute="leadingMargin" constant="10" id="Srb-sL-S5K"/>
+                                        <constraint firstItem="ZcH-oP-NbI" firstAttribute="centerY" secondItem="PIg-JG-6hU" secondAttribute="centerY" id="WiC-q5-spm"/>
+                                        <constraint firstItem="4ix-ny-6xd" firstAttribute="centerY" secondItem="PIg-JG-6hU" secondAttribute="centerY" id="ZWD-Ty-E3R"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="ZcH-oP-NbI" secondAttribute="bottom" constant="-6" id="rNt-JL-9EN"/>
+                                        <constraint firstAttribute="trailing" secondItem="ZcH-oP-NbI" secondAttribute="trailing" constant="10" id="xOV-jp-sqb"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0az-ld-R1N" id="epO-Vz-Dj7"/>
+                            <outlet property="delegate" destination="0az-ld-R1N" id="5bM-V6-mtD"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Roster" id="d1s-i4-GQy">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="Sv4-Zy-a7f"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RTT-xD-9qI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7270" y="-656"/>
+        </scene>
+        <!--League Table View Controller-->
+        <scene sceneID="aIL-vu-aSA">
+            <objects>
+                <tableViewController id="lPm-fA-h8K" customClass="LeagueTableViewController" customModule="FantasyHockeyDraftBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8B6-xk-YlB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="DuO-nu-yQ7">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="Title" id="a96-IK-bbB">
+                                    <barButtonItem key="rightBarButtonItem" systemItem="add" id="keK-YG-Q1D">
+                                        <connections>
+                                            <segue destination="mtA-CP-Ec6" kind="show" identifier="addLeagueSegue" id="gwz-U0-XNf"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LeagueCell" rowHeight="60" id="UEG-L1-5Ge" customClass="LeagueTableViewCell" customModule="FantasyHockeyDraftBuddy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="375" height="60"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UEG-L1-5Ge" id="O5w-sU-9F1">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.666666666666664"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="League Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zj-0r-r8o">
+                                            <rect key="frame" x="112.66666666666667" y="15" width="149.66666666666663" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="4Zj-0r-r8o" firstAttribute="centerY" secondItem="O5w-sU-9F1" secondAttribute="centerY" id="0Cw-tQ-LlZ"/>
+                                        <constraint firstItem="4Zj-0r-r8o" firstAttribute="centerX" secondItem="O5w-sU-9F1" secondAttribute="centerX" id="Sxq-O1-nqV"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="leagueCellLabel" destination="4Zj-0r-r8o" id="o7P-8A-l9d"/>
+                                    <segue destination="GYh-af-KTZ" kind="show" identifier="leagueSegue" id="ELk-nT-O2G"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="lPm-fA-h8K" id="IuQ-Ep-fgK"/>
+                            <outlet property="delegate" destination="lPm-fA-h8K" id="2zb-04-D0D"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZYY-co-Ip9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4714.3999999999996" y="105.66502463054188"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Yj8-8U-bNz">
@@ -249,6 +468,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="GYh-af-KTZ" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Rbl-ba-xu2">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -258,7 +478,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfO-HP-s79" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4725.6000000000004" y="106.40394088669952"/>
+            <point key="canvasLocation" x="5668" y="106.40394088669952"/>
         </scene>
         <!--Item-->
         <scene sceneID="9QZ-9C-uD4">
@@ -277,7 +497,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uP4-aw-2Ph" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6949.6000000000004" y="-947.29064039408865"/>
+            <point key="canvasLocation" x="8079" y="106"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bbH-D4-BG1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="mtA-CP-Ec6" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uEd-Lv-PF8">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Wgo-vl-nPO" kind="relationship" relationship="rootViewController" id="SHB-LJ-deh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yhU-Jf-mnW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4733.6000000000004" y="-654.67980295566508"/>
         </scene>
     </scenes>
     <resources>
