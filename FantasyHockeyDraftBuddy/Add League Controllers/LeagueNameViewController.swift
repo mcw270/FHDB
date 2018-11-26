@@ -31,13 +31,14 @@ class LeagueNameViewController: UIViewController {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        leagueName = leagueNameTextField.text!
+        
         performSegue(withIdentifier: "leagueNameToScoringSegue", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destination = segue.destination as! AddLeagueScoringTableViewController
         
+        leagueName = leagueNameTextField.text!
         destination.leagueName = leagueName
     }
 

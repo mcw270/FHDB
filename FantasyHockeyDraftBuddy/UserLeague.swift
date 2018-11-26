@@ -10,19 +10,24 @@ import Foundation
 
 class UserLeague {
     var name: String
-    var positionSizes: [Position: Int]
-    var scoring: [String: Int]
+    var positionSizes: [(Position, Double)]
+    var skaterStats: [(skaterStat, Double)]
+    var goalieStats: [(goalieStat, Double)]
     var teams: [UserTeam]
     var playerList: [RosterElement]?
-    var remainingRoster: [Position: Int]
+    var remainingRoster: [Position: Double] = [:]
     
-    init(name: String, positionSizes: [Position: Int], scoring: [String: Int], teams: [UserTeam], playerList: [RosterElement]?) {
+    init(name: String, positionSizes: [(Position, Double)], skaterStats: [(skaterStat, Double)], goalieStats: [(goalieStat, Double)], teams: [UserTeam], playerList: [RosterElement]?) {
         self.name = name
         self.positionSizes = positionSizes
-        self.scoring = scoring
+        self.skaterStats = skaterStats
+        self.goalieStats = goalieStats
         self.teams = teams
         self.playerList = playerList
-        self.remainingRoster = positionSizes
+        
+        positionSizes.forEach {
+            self.remainingRoster[$0.0] = $0.1
+        }
     }
     
     func draftPlayer(currentTeam: UserTeam, player: RosterElement, position: Position, selectedIndex: Int) {
@@ -38,8 +43,34 @@ class UserLeague {
         
     }
     
-    enum Position {
-        case forward, leftWing, center, rightWing, defenseman, goalie, bench
+    enum Position: String {
+        case forward = "Forward"
+        case leftWing = "Left Wing"
+        case center = "Center"
+        case rightWing = "Right Wing"
+        case defenseman = "Defenseman"
+        case goalie = "Goalie"
+        case bench = "Bench"
+        
+        static let allValues = [forward,
+                                leftWing,
+                                center,
+                                rightWing,
+                                defenseman,
+                                goalie,
+                                bench]
+        
+        var abbreviation: String {
+            switch self {
+            case .forward: return "F"
+            case .leftWing: return "LW"
+            case .center: return "C"
+            case .rightWing: return "RW"
+            case .defenseman: return "D"
+            case .goalie: return "G"
+            case .bench: return "BN"
+            }
+        }
     }
     
     enum skaterStat: String {
@@ -131,21 +162,4 @@ class UserLeague {
             }
         }
     }
-    
-    static func loadSampleData() -> [UserLeague] {
-        let positions = [UserLeague.Position.leftWing: 5,
-                         UserLeague.Position.center: 5,
-                         UserLeague.Position.rightWing: 5,
-                         UserLeague.Position.defenseman: 3,
-                         UserLeague.Position.goalie: 2]
-        
-        let scoring: [String: Int] = ["G": 1, "A": 1, "P": 1]
-        
-        let team = UserTeam.init(name: "Test Team", players: nil, keepers: nil)
-        
-        let myLeague = UserLeague.init(name: "Test League", positionSizes: positions, scoring: scoring, teams: [team], playerList: nil)
-        
-        return [myLeague]
-    }
-    
 }

@@ -8,87 +8,86 @@
 
 import UIKit
 
-class AddLeagueRosterTableViewController: UITableViewController {
+class AddLeagueRosterTableViewController: UITableViewController, LeagueScoringCellDelegate {
     
-    var leagueName = ""
-    var skaterStats: [(UserLeague.skaterStat, Double)] = []
-    var goalieStats: [(UserLeague.goalieStat, Double)] = []
+    @IBOutlet weak var doneButton: UIBarButtonItem!
+    
+    var leagueName: String?
+    var skaterStats: [(UserLeague.skaterStat, Double)]?
+    var goalieStats: [(UserLeague.goalieStat, Double)]?
+    
+    let positions = UserLeague.Position.allValues
+    var positionValues: [Int] = []
+    
+    var league: UserLeague?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        positionValues = [Int](repeating: 0, count: positions.count)
+        updateDoneButton()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+
+        return positions.count
     }
 
-    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "addLeagueRosterCell", for: indexPath) as! AddLeagueScoringTableViewCell
 
-        // Configure the cell...
-
+        cell.delegate = self
+        cell.setStepperProperties(minVal: 0, maxVal: 20, stepVal: 1)
+        cell.update(statLabelText: positions[indexPath.row].rawValue, statCounter: Double(positionValues[indexPath.row]))
+        
         return cell
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Roster Amounts"
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    func leagueScoringCellStepperChanged(sender: AddLeagueScoringTableViewCell, value: Double) {
+        let indexPath = tableView.indexPath(for: sender)
+        
+        if let row = indexPath?.row {
+            positionValues[row] = Int(value)
+        }
+        
+        updateDoneButton()
     }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    func updateDoneButton() {
+        if positionValues.filter( {$0 != 0} ).isEmpty {
+            doneButton.isEnabled = false
+        } else {
+            doneButton.isEnabled = true
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "unwindToLeagues" {
+            
+            let positionArray = combineAndFilterArrays(keyArray: positions, valueArray: positionValues.map( {Double($0)} )) as! [(UserLeague.Position, Double)]
+            
+             league = UserLeague(name: leagueName!, positionSizes: positionArray, skaterStats: skaterStats!, goalieStats: goalieStats!, teams: [UserTeam(name: "Team", players: nil, keepers: nil)], playerList: nil)
+            
+        }
     }
-    */
+    
+    @IBAction func doneButtonTapped(_ sender: Any) {
 
+        
+        performSegue(withIdentifier: "unwindToLeagues", sender: self)
+    
+    }
+    
 }

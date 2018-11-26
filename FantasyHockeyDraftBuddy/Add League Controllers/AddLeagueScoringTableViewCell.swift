@@ -22,10 +22,12 @@ class AddLeagueScoringTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        statStepper.minimumValue = -20
-        statStepper.maximumValue = 20
-        statStepper.stepValue = 0.5
+    }
+    
+    func setStepperProperties(minVal: Double, maxVal: Double, stepVal: Double) {
+        statStepper.minimumValue = minVal
+        statStepper.maximumValue = maxVal
+        statStepper.stepValue = stepVal
     }
 
     func update(statLabelText: String, statCounter: Double) {

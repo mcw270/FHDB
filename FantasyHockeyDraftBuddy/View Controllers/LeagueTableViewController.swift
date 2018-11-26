@@ -11,7 +11,7 @@ import UIKit
 class LeagueTableViewController: UITableViewController {
     
     var players: [RosterElement] = []
-    var leagues: [UserLeague] = UserLeague.loadSampleData()
+    var leagues: [UserLeague] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,6 +94,20 @@ class LeagueTableViewController: UITableViewController {
             let destinationViewController = nav.viewControllers[0] as! PlayerTableViewController
             destinationViewController.players = players
         }
+    }
+    
+    @IBAction func unwindToLeagues(segue:UIStoryboardSegue) {
+        
+        guard segue.identifier == "unwindToLeagues" else { return }
+        
+        let sourceVC = segue.source as! AddLeagueRosterTableViewController
+        
+        if let league = sourceVC.league {
+            let newIndexPath = IndexPath(row: leagues.count, section: 0)
+            leagues.append(league)
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        }
+        
     }
 }
 

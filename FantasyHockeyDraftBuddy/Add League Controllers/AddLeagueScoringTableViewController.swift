@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import Foundation
 
 class AddLeagueScoringTableViewController: UITableViewController, LeagueScoringCellDelegate {
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
-    var leagueName = ""
+    var leagueName: String?
+    
     let skaterScoringStats = UserLeague.skaterStat.allValues
     let goalieScoringStats = UserLeague.goalieStat.allValues
     
@@ -47,6 +49,7 @@ class AddLeagueScoringTableViewController: UITableViewController, LeagueScoringC
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "addLeagueScoringCell", for: indexPath) as! AddLeagueScoringTableViewCell
         cell.delegate = self
+        cell.setStepperProperties(minVal: -20, maxVal: 20, stepVal: 0.5)
         if indexPath.section == 0 {
             cell.update(statLabelText: skaterScoringStats[indexPath.row].rawValue, statCounter: skaterScoringStatsValues[indexPath.row])
         } else if indexPath.section == 1 {
@@ -98,27 +101,12 @@ class AddLeagueScoringTableViewController: UITableViewController, LeagueScoringC
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "scoringToRosterSegue" {
-            skaterScoringArray = combineAndFilterStatsArrays(statsArray: skaterScoringStats, valueArray: skaterScoringStatsValues) as! [(UserLeague.skaterStat, Double)]
-            goalieScoringArray = combineAndFilterStatsArrays(statsArray: goalieScoringStats, valueArray: goalieScoringStatsValues) as! [(UserLeague.goalieStat, Double)]
+            skaterScoringArray = combineAndFilterArrays(keyArray: skaterScoringStats, valueArray: skaterScoringStatsValues) as! [(UserLeague.skaterStat, Double)]
+            goalieScoringArray = combineAndFilterArrays(keyArray: goalieScoringStats, valueArray: goalieScoringStatsValues) as! [(UserLeague.goalieStat, Double)]
             let destination = segue.destination as! AddLeagueRosterTableViewController
             destination.leagueName = leagueName
             destination.skaterStats = skaterScoringArray
             destination.goalieStats = goalieScoringArray
         }
-    }
-    
-    func combineAndFilterStatsArrays(statsArray: [Any], valueArray: [Double]) -> [(Any, Double)]? {
-        if statsArray.count != valueArray.count {
-            return nil
-        }
-        
-        var combinedArray: [(Any, Double)] = []
-        
-        for (index, element) in statsArray.enumerated() {
-            combinedArray.append((element, valueArray[index]))
-        }
-        
-        let filteredCombinedArray = combinedArray.filter({ $0.1 != 0 })
-        return filteredCombinedArray
     }
 }

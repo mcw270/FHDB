@@ -353,7 +353,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addLeagueRosterCell" id="KVw-cD-qwe">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="addLeagueRosterCell" id="KVw-cD-qwe" customClass="AddLeagueScoringTableViewCell" customModule="FantasyHockeyDraftBuddy" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KVw-cD-qwe" id="PIg-JG-6hU">
@@ -361,22 +361,25 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ix-ny-6xd">
-                                            <rect key="frame" x="26" y="5.6666666666666679" width="64" height="32.333333333333329"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                            <rect key="frame" x="26" y="10" width="48" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZcH-oP-NbI">
-                                            <rect key="frame" x="244" y="4.6666666666666679" width="121" height="34.333333333333329"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZcH-oP-NbI">
+                                            <rect key="frame" x="248.33333333333334" y="4.6666666666666679" width="116.66666666666666" height="34.333333333333329"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ls5-DT-zlE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="17" height="34.333333333333336"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                                    <rect key="frame" x="0.0" y="5.3333333333333321" width="12.666666666666666" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="U48-6S-3fi">
-                                                    <rect key="frame" x="27" y="0.0" width="94" height="29"/>
+                                                    <rect key="frame" x="22.666666666666657" y="2.6666666666666643" width="94" height="29"/>
+                                                    <connections>
+                                                        <action selector="stepperTapped:" destination="KVw-cD-qwe" eventType="valueChanged" id="vMA-hp-GuS"/>
+                                                    </connections>
                                                 </stepper>
                                             </subviews>
                                         </stackView>
@@ -390,6 +393,11 @@
                                         <constraint firstAttribute="trailing" secondItem="ZcH-oP-NbI" secondAttribute="trailing" constant="10" id="xOV-jp-sqb"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="statCountLabel" destination="ls5-DT-zlE" id="n7d-WO-Tsw"/>
+                                    <outlet property="statLabel" destination="4ix-ny-6xd" id="ZQ7-87-WIk"/>
+                                    <outlet property="statStepper" destination="U48-6S-3fi" id="7zl-uJ-yvz"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -398,10 +406,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Roster" id="d1s-i4-GQy">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="Sv4-Zy-a7f"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="Sv4-Zy-a7f">
+                            <connections>
+                                <action selector="doneButtonTapped:" destination="0az-ld-R1N" id="Uby-5K-uRx"/>
+                                <segue destination="DVF-6H-eoq" kind="unwind" identifier="unwindToLeagues" unwindAction="unwindToLeaguesWithSegue:" id="be6-qG-XrC"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="doneButton" destination="Sv4-Zy-a7f" id="Czr-Pd-jMl"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RTT-xD-9qI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="DVF-6H-eoq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="7270" y="-656"/>
         </scene>
