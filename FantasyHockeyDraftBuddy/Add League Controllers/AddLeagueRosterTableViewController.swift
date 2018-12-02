@@ -13,8 +13,10 @@ class AddLeagueRosterTableViewController: UITableViewController, LeagueScoringCe
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     var leagueName: String?
+    var teams: [String]?
     var skaterStats: [(UserLeague.skaterStat, Double)]?
     var goalieStats: [(UserLeague.goalieStat, Double)]?
+    var players: [RosterElement] = []
     
     let positions = UserLeague.Position.allValues
     var positionValues: [Int] = []
@@ -76,18 +78,49 @@ class AddLeagueRosterTableViewController: UITableViewController, LeagueScoringCe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "unwindToLeagues" {
             
+            var allTeams: [UserTeam] = []
             let positionArray = combineAndFilterArrays(keyArray: positions, valueArray: positionValues.map( {Double($0)} )) as! [(UserLeague.Position, Double)]
             
-             league = UserLeague(name: leagueName!, positionSizes: positionArray, skaterStats: skaterStats!, goalieStats: goalieStats!, teams: [UserTeam(name: "Team", players: nil, keepers: nil)], playerList: nil)
+            if let teams = teams {
+                for team in teams {
+                    let userTeam = UserTeam(name: team, players: nil, keepers: nil)
+                    allTeams.append(userTeam)
+                }
+            }
+            
+             league = UserLeague(name: leagueName!, positionSizes: positionArray, skaterStats: skaterStats!, goalieStats: goalieStats!, teams: allTeams, playerList: players)
             
         }
     }
     
     @IBAction func doneButtonTapped(_ sender: Any) {
-
         
-        performSegue(withIdentifier: "unwindToLeagues", sender: self)
-    
+        
+        let group = DispatchGroup()
+        APIController.fetchNHLInfo { (teamList) in
+            for team in teamList {
+                for player in team.roster.rosterList {
+                    group.enter()
+                    player.person.team = team.abbreviation
+                    self.players.append(player)
+                    APIController.fetchStatistics(playerID: player.person.id, completion: { (stats) in
+                        guard let stats = stats else {
+                            group.leave()
+                            return
+                        }
+                        
+                        player.setStats(stats: stats)
+                        group.leave()
+                    })
+                }
+            }
+            
+            group.notify(queue: .main) {
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "unwindToLeagues", sender: self)
+                }
+            }
+        }
     }
     
 }

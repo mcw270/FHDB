@@ -10,50 +10,13 @@ import UIKit
 
 class LeagueTableViewController: UITableViewController {
     
-    var players: [RosterElement] = []
+    
     var leagues: [UserLeague] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let group = DispatchGroup()
-        APIController.fetchNHLInfo { (teamList) in
-            for team in teamList {
-                for player in team.roster.rosterList {
-                    group.enter()
-                    player.person.team = team.abbreviation
-                    self.players.append(player)
-                    APIController.fetchStatistics(playerID: player.person.id, completion: { (stats) in
-                        guard let stats = stats else {
-                            group.leave()
-                            return
-                        }
-                        
-                        player.setStats(stats: stats)
-                        group.leave()
-                    })
-                }
-            }
-            
-            group.notify(queue: .main) {
-                let alert = UIAlertController(title: "Loaded", message: "Loaded Data", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                    switch action.style{
-                    case .default:
-                        print("default")
-                        
-                    case .cancel:
-                        print("cancel")
-                        
-                    case .destructive:
-                        print("destructive")
-                        
-                        
-                    }}))
-                self.present(alert, animated: true, completion: nil)
-            }
-            
-        }
+        
         
 
     }
@@ -85,14 +48,17 @@ class LeagueTableViewController: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        let destination = segue.destination as! PlayerTableViewController
-//        destination.players = players
         
         if segue.identifier == "leagueSegue" {
             let barViewControllers = segue.destination as! UITabBarController
             let nav = barViewControllers.viewControllers![0] as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! PlayerTableViewController
-            destinationViewController.players = players
+            
+            if let indexPath = tableView.indexPathForSelectedRow {
+                if let playerList = leagues[indexPath.row].playerList {
+                    destinationViewController.players = playerList
+                }
+            }
         }
     }
     

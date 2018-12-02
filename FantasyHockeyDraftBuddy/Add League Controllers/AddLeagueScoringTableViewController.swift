@@ -14,6 +14,7 @@ class AddLeagueScoringTableViewController: UITableViewController, LeagueScoringC
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
     var leagueName: String?
+    var teams: [String]?
     
     let skaterScoringStats = UserLeague.skaterStat.allValues
     let goalieScoringStats = UserLeague.goalieStat.allValues
@@ -105,6 +106,7 @@ class AddLeagueScoringTableViewController: UITableViewController, LeagueScoringC
             goalieScoringArray = combineAndFilterArrays(keyArray: goalieScoringStats, valueArray: goalieScoringStatsValues) as! [(UserLeague.goalieStat, Double)]
             let destination = segue.destination as! AddLeagueRosterTableViewController
             destination.leagueName = leagueName
+            destination.teams = teams
             destination.skaterStats = skaterScoringArray
             destination.goalieStats = goalieScoringArray
         }
